@@ -28,18 +28,27 @@ function getAllyEnemyRootIds(player, blueTeam, redTeam) {
 function calcMapEditScore(details, allyRootBlockId, enemyRootBlockId) {
     if (!details || !details.MapChange) return 0;
     const mapChange = details.MapChange;
-    // постановка блока (одиночный или линия)
+    // прошлое состояние области (для корректной интерпретации события)
+    const oldList = details.OldMapData || [];
+    // постановка блока (одиночный или линия) — считаем постановкой ТОЛЬКО если до этого были пустые блоки
     if (mapChange.BlockId > 0) {
-        log.Debug(`[MapScores] PLACE id=${mapChange.BlockId}`);
-        return PLACE_BLOCK_SCORE;
+		const newRoot = BreackGraph.BlockRoot(mapChange.BlockId);
+		// проверяем только первое старое значение, чтобы не нагружать
+		const firstOld = oldList.length > 0 ? oldList[0] : null;
+		const firstWasEmpty = !firstOld || !firstOld.BlockId || firstOld.BlockId === 0;
+		if (firstWasEmpty && newRoot !== enemyRootBlockId) {
+			log.Debug(`[MapScores] PLACE ok id=${mapChange.BlockId} blocks=${mapChange.Range.BlocksCount} +${PLACE_BLOCK_SCORE}`);
+			return PLACE_BLOCK_SCORE;
+		}
+		log.Debug(`[MapScores] PLACE skip: replaceOrEnemy firstWasEmpty=${firstWasEmpty} newRoot=${newRoot}`);
+        return 0;
     }
 
     // поломка блока определяем как изменение блока на 0 (стирание)
     const isDeletion = mapChange.BlockId === 0;
     if (!isDeletion) return 0;
 
-	// удаление: анализируем, что было до изменения (старые блоки в области)
-	const oldList = details.OldMapData || [];
+    // удаление: анализируем, что было до изменения (старые блоки в области)
 	let total = 0;
     for (let i = 0; i < oldList.length; ++i) {
 		const old = oldList[i];
