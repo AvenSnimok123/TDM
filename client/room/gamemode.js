@@ -116,13 +116,13 @@ Damage.OnDeath.Add(function (player) {
 // детальный отчёт по убийству: начисляем очки за убийство и ассисты по ТЗ
 Damage.OnKillReport.Add(function (victim, killer, report) {
     if (stateProp.Value == MockModeStateValue) return;
-    damageScores.applyKillReportScores(victim, killer, report, SCORES_PROP_NAME);
+    damageScores.applyKillReportScores(victim, killer, report);
 });
 
 // начисление очков за редактирование карты
 MapEditor.OnMapEdited.Add(function (player, details) {
     if (stateProp.Value == MockModeStateValue) return;
-    mapScores.applyMapEditScores(player, details, blueTeam, redTeam, SCORES_PROP_NAME);
+    mapScores.applyMapEditScores(player, details, blueTeam, redTeam);
 });
 
 // таймер очков за проведенное время

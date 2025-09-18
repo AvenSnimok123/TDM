@@ -1,6 +1,8 @@
 // библиотека расчёта очков за изменения карты
 import { BreackGraph } from 'pixel_combats/room';
 
+const SCORES_PROP_NAME = "Scores";
+
 // корневые ID блоков команд
 const RED_TEAM_ROOT_BLOCK_ID = 33;
 const BLUE_TEAM_ROOT_BLOCK_ID = 28;
@@ -50,12 +52,12 @@ function calcMapEditScore(details, breackGraph, allyRootBlockId, enemyRootBlockI
 }
 
 // применяет начисления очков игроку за редактирование карты
-export function applyMapEditScores(player, details, blueTeam, redTeam, scoresPropName) {
+export function applyMapEditScores(player, details, blueTeam, redTeam) {
 	if (!player) return;
 	if (!details || !details.MapChange) return;
 	const roots = getAllyEnemyRootIds(player, blueTeam, redTeam);
 	const add = calcMapEditScore(details, BreackGraph, roots.allyRootId, roots.enemyRootId);
-	player.Properties.Get(scoresPropName).Value += add;
+	player.Properties.Scores.Value += add;
 }
 
 

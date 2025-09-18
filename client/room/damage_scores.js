@@ -2,6 +2,8 @@
 
 import { GameMode } from 'pixel_combats/room';
 
+const SCORES_PROP_NAME = "Scores";
+
 const MAP_LENGTH_PARAM = 'default_game_mode_length';
 const MAP_MODIFIERS = {
 	Length_S: 0.8,
@@ -69,24 +71,29 @@ function calcAssistScore(assistItem) {
 }
 
 // применяет начисления очков по отчёту убийства (убийца + ассисты)
-export function applyKillReportScores(victim, killer, report, teamScoresProp) {
+export function applyKillReportScores(victim, killer, report) {
 	if (!report) return;
 	// убийца
 	if (killer && victim && killer.Team != null && victim.Team != null && killer.Team != victim.Team) {
-		++killer.Properties.Kills.Value;
-		if (teamScoresProp)
-			teamScoresProp.Value += KILL_SCORES;
-		killer.Properties.Scores.Value += calcKillScoreFromHit(report.KillHit);
+        // обработка команды убийцы
+        const teamScoresProp = killer.Team && killer.Team.Properties ? killer.Team.Properties.Get(SCORES_PROP_NAME) : null;
+        if (teamScoresProp)
+            teamScoresProp.Value += KILL_SCORES;
+        // обработка индивидуальных очков убийцы
+        ++killer.Properties.Kills.Value;
+		killer.Properties.Scores.Value += calcKillScoreFromHit(report.KillHit); 
 	}
 
-	// ассисты
-	const items = report.Items || [];
-	for (const it of items) {
-		if (!it || it.IsKiller) continue;
-		const p = it.Attacker;
-		if (!p || !victim || p.Team == null || victim.Team == null) continue;
-		if (p.Team === victim.Team) continue;
-		p.Properties.Scores.Value += calcAssistScore(it);
+	// обработка ассистов
+	for (const i of (report.Items || [])) {
+        // ограничитель убийцы
+		if (!i || i.IsKiller) continue;
+        // и атакующий и жертва должны быть в командах
+		if (i.Attacker.Team == null || victim.Team == null) continue;
+        // ограничитель френдли фаера
+		if (i.Attacker.Team === victim.Team) continue;
+        // обработка индивидуальных очков ассиста
+		i.Attacker.Properties.Scores.Value += calcAssistScore(i);
 	}
 }
 
