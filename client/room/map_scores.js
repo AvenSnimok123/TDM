@@ -35,6 +35,7 @@ function calcMapEditScore(details, allyRootBlockId, enemyRootBlockId) {
 		// проверяем только первое старое значение, чтобы не нагружать
 		const firstOld = oldList.length > 0 ? oldList[0] : null;
 		const firstWasEmpty = !firstOld || !firstOld.BlockId || firstOld.BlockId === 0;
+		log.Debug(`[MapScores] firstOld =${firstOld?.BlockId} firstWasEmpty=${firstWasEmpty}`);
 		// если было пустота то это постановка блока
 		if (firstWasEmpty) return PLACE_BLOCK_SCORE;
 		else return 0; 
