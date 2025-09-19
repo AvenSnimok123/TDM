@@ -35,20 +35,9 @@ function calcMapEditScore(details, allyRootBlockId, enemyRootBlockId) {
 		// проверяем только первое старое значение, чтобы не нагружать
 		const firstOld = oldList.length > 0 ? oldList[0] : null;
 		const firstWasEmpty = !firstOld || !firstOld.BlockId || firstOld.BlockId === 0;
-		if (!firstWasEmpty) {
-			const oldRoot = BreackGraph.BlockRoot(firstOld.BlockId);
-			const newRoot = BreackGraph.BlockRoot(mapChange.BlockId);
-			// если рут совпадает — это промежуточная стадия поломки, очки не начисляем
-			if (oldRoot === newRoot) {
-				log.Debug(`[MapScores] PLACE skip: intermediate old=${firstOld.BlockId} oldRoot=${oldRoot} new=${mapChange.BlockId} newRoot=${newRoot}`);
-				return 0;
-			}
-			// замена непустого блока — очки не начисляем
-			log.Debug(`[MapScores] PLACE skip: replace old=${firstOld.BlockId} new=${mapChange.BlockId}`);
-			return 0;
-		}
-		log.Debug(`[MapScores] PLACE ok id=${mapChange.BlockId} blocks=${mapChange.Range.BlocksCount} +${PLACE_BLOCK_SCORE}`);
-		return PLACE_BLOCK_SCORE;
+		// если было пустота то это постановка блока
+		if (firstWasEmpty) return PLACE_BLOCK_SCORE;
+		else return 0; 
 	}
 
     // поломка блока определяем как изменение блока на 0 (стирание)
