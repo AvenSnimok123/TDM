@@ -37,6 +37,8 @@ function calcMapEditScore(details, allyRootBlockId, enemyRootBlockId) {
 		const firstWasEmpty = !firstOld || !firstOld.BlockId || firstOld.BlockId === 0;
 		log.Debug(`[MapScores] oldList.length=${oldList.length}`);
 		if(oldList.length > 0) {
+			log.Debug(`[MapScores] oldList[0]=${oldList[0]}`);
+			log.Debug(`[MapScores] oldList[0]=${oldList[0].Range}`);
 			log.Debug(`[MapScores] oldList[0].BlockId=${oldList[0].BlockId}`);
 		}
 		log.Debug(`[MapScores] firstOld=${firstOld?.BlockId} firstWasEmpty=${firstWasEmpty}`);
