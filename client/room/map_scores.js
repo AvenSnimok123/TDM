@@ -1,5 +1,5 @@
 // библиотека расчёта очков за изменения карты
-import { BreackGraph } from 'pixel_combats/room';
+import { BreackGraph, ScoreInfo } from 'pixel_combats/room';
 
 // константы
 const SCORES_PROP_NAME = "Scores";           // имя свойства очков у игрока/команды
@@ -56,15 +56,31 @@ function calcMapEditScore(details, allyRootBlockId, enemyRootBlockId) {
 		if (blocksCount < 1) blocksCount = 1;
         if (root === enemyRootBlockId) {
 			// разрушение блока врага
-            total += ENEMY_BLOCK_SCORE * blocksCount;            
+			let scoresToadd = ENEMY_BLOCK_SCORE * blocksCount;
+            total += scoresToadd;
+			// выводим уведомление
+			ScoreInfo.Show(details.Player, {
+				Type: 5, // EnemyBlockDestroy
+				WeaponId: 0,
+				Scores: scoresToadd,
+				IsHeadshot: false
+			});
 		}
 		else if (root === allyRootBlockId) {
 			// разрушение своего/союзного блока — без очков
             // total += 0;
 		}
-		else {
+        else {
 			// блок карты — фиксированное количество за каждый удалённый блок
-            total += MAP_BLOCK_SCORE * blocksCount;            
+			let scoresToadd = MAP_BLOCK_SCORE * blocksCount;
+            total += scoresToadd;
+			// выводим уведомление
+			ScoreInfo.Show(details.Player, {
+				Type: 4, // NeutralBlockDestroy (map block)
+				WeaponId: 0,
+				Scores: scoresToadd,
+				IsHeadshot: false
+			});
 		}
 	}
 	return total;

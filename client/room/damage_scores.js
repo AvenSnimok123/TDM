@@ -1,4 +1,5 @@
 // библиотека расчёта очков за урон/убийства/ассисты для TDM
+import { ScoreInfo } from 'pixel_combats/room';
 
 const SCORES_PROP_NAME = "Scores";
 
@@ -119,7 +120,15 @@ export function applyKillReportScores(victim, killer, report) {
             teamScoresProp.Value += KILL_SCORES;
         // обработка индивидуальных очков убийцы
         ++killer.Properties.Kills.Value;
-		killer.Properties.Scores.Value += calcKillScoreFromHit(report.KillHit); 
+		const killAdd = calcKillScoreFromHit(report.KillHit);
+		killer.Properties.Scores.Value += killAdd;
+		// визуализация начисления очков за килл
+		ScoreInfo.Show(killer, {
+			Type: 2, // ScoreInformType.Kill
+			WeaponId: report.KillHit ? report.KillHit.WeaponID : 0,
+			Scores: killAdd,
+			IsHeadshot: !!(report.KillHit && report.KillHit.IsHeadShot === true)
+		});
 	}
 
 	// обработка ассистов
@@ -130,8 +139,16 @@ export function applyKillReportScores(victim, killer, report) {
 		if (i.Attacker.Team == null || victim.Team == null) continue;
         // ограничитель френдли фаера
 		if (i.Attacker.Team === victim.Team) continue;
-        // обработка индивидуальных очков ассиста
-		i.Attacker.Properties.Scores.Value += calcAssistScore(i);
+		// обработка индивидуальных очков ассиста
+		const assistAdd = calcAssistScore(i);
+		i.Attacker.Properties.Scores.Value += assistAdd;
+		// визуализация начисления очков за ассист
+		ScoreInfo.Show(i.Attacker, {
+			Type: 1, // ScoreInformType.Assist
+			WeaponId: 0,
+			Scores: assistAdd,
+			IsHeadshot: false
+		});
 	}
 }
 
