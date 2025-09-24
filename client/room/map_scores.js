@@ -4,7 +4,7 @@ import { BreackGraph, ScoreInfo } from 'pixel_combats/room';
 // константы
 const SCORES_PROP_NAME = "Scores";           // имя свойства очков у игрока/команды
 const ENEMY_BLOCK_SCORE = 25;                // очки за разрушение 1 вражеского блока
-const MAP_BLOCK_SCORE = 2;                   // очки за разрушение 1 блока карты
+const MAP_BLOCK_SCORE = 1;                   // очки за разрушение 1 блока карты
 const PLACE_BLOCK_SCORE = 5;                 // очки за постановку блока/линии
 // корневые ID блоков команд
 const RED_TEAM_ROOT_BLOCK_ID = 33;           // корневой блок красной команды
