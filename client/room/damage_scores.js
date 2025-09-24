@@ -1,5 +1,5 @@
 // библиотека расчёта очков за урон/убийства/ассисты для TDM
-import { ScoreInfo } from 'pixel_combats/room';
+//import * as Room from 'pixel_combats/room';
 
 const SCORES_PROP_NAME = "Scores";
 
