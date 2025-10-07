@@ -6,7 +6,7 @@ import * as damageScores from './damage_scores.js';
 import * as mapScores from './map_scores.js';
 import { addTeamScores } from './team_scores.js';
 
-room.room.PopupsEnable = true;
+room.PopupsEnable = true;
 
 // настройки
 const WaitingPlayersTime = 10;
