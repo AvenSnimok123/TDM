@@ -1,0 +1,16 @@
+{
+  "mode.name": "Командный бой",
+  "mode.description": "Две команды сражаются, чтобы набрать лимит фрагов.",
+
+  "Length_S": "Короткий",
+  "Length_M": "Средний",
+  "Length_L": "Длинный",
+  "Length_XL": "Очень длинный",
+
+  "GmParams/MapRotation": "Ротация карт",
+  "GmParams/OnlyKnives": "Только ножи",
+  "GmParams/OnlyPlayerBlocksDmg": "Урон только по блокам игроков",
+  "GmParams/LoosenBlocks": "Ослабить блоки",
+  "GmParams/FriendlyFire": "Огонь по своим"
+}
+

@@ -1,0 +1,16 @@
+{
+  "mode.name": "Combate por equipos",
+  "mode.description": "Dos equipos luchan para alcanzar el límite de bajas.",
+
+  "Length_S": "Corto",
+  "Length_M": "Medio",
+  "Length_L": "Largo",
+  "Length_XL": "Muy largo",
+
+  "GmParams/MapRotation": "Rotación de mapas",
+  "GmParams/OnlyKnives": "Solo cuchillos",
+  "GmParams/OnlyPlayerBlocksDmg": "Daño solo a bloques de jugadores",
+  "GmParams/LoosenBlocks": "Debilitar bloques",
+  "GmParams/FriendlyFire": "Fuego amigo"
+}
+

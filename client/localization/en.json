@@ -1,0 +1,16 @@
+{
+  "mode.name": "Team Deathmatch",
+  "mode.description": "Two teams fight to reach the frag limit.",
+
+  "Length_S": "Short",
+  "Length_M": "Medium",
+  "Length_L": "Long",
+  "Length_XL": "Very Long",
+
+  "GmParams/MapRotation": "Map rotation",
+  "GmParams/OnlyKnives": "Only knives",
+  "GmParams/OnlyPlayerBlocksDmg": "Damage only to player blocks",
+  "GmParams/LoosenBlocks": "Loosen blocks",
+  "GmParams/FriendlyFire": "Friendly fire"
+}
+
