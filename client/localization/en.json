@@ -17,8 +17,8 @@
   "Hint/Overtime": "30s final fight",
   "Hint/TieBreaker": "Final frag!",
   "Hint/EndOfMatch": "End of match",
-  "Hint/MockHintForWinners": "Congratulations on victory!",
-  "Hint/MockHintForLoosers": "Try again!",
+  "Hint/MockHintForWinners": "Victory! Punishing the losers! 😈",
+  "Hint/MockHintForLoosers": "Defeat! The winners are punishing us! 😭",
 
   "Statistics/Kills": "Kills",
   "Statistics/KillsShort": "K",

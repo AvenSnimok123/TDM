@@ -17,8 +17,8 @@
   "Hint/Overtime": "30 сек решающий бой",
   "Hint/TieBreaker": "Финальный фраг!",
   "Hint/EndOfMatch": "Конец матча",
-  "Hint/MockHintForWinners": "Поздравляем с победой!",
-  "Hint/MockHintForLoosers": "Попробуйте еще раз!",
+  "Hint/MockHintForWinners": "Победа! Караем проигравших! 😈",
+  "Hint/MockHintForLoosers": "Поражение! Победившие карают нас! 😭",
 
   "Statistics/Kills": "Убийства",
   "Statistics/KillsShort": "K",
