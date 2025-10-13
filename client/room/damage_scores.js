@@ -7,8 +7,8 @@ import { addTeamScores } from './team_scores.js';
 const MAP_LENGTH_MODIFIERS = {
 	'Length_S': 0.9,
 	'Length_M': 1.0,
-	'Length_L': 1.2,
-	'Length_XL': 1.4,
+	'Length_L': 1.1,
+	'Length_XL': 1.2,
 };
 
 function getMapModifier() {

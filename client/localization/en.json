@@ -1,6 +1,6 @@
 {
-  "mode.name": "Team Deathmatch",
-  "mode.description": "Two teams fight to reach the frag limit.",
+  "mode.name": "TDM 2.0 Enhanced",
+  "mode.description": "3-stage team battle with full Merit system",
 
   "maplist.allmaps": "All Maps",
 
@@ -8,6 +8,25 @@
   "params.OnlyKnives": "Only knives",
   "params.OnlyPlayerBlocksDmg": "Damage only to player blocks",
   "params.LoosenBlocks": "Loosen blocks",
-  "params.FriendlyFire": "Friendly fire"
+  "params.FriendlyFire": "Friendly fire",
+
+  "Hint/WaitingPlayers": "Waiting for players",
+  "Hint/TacticalPrep": "Tactical preparation",
+  "Hint/MainBattle": "Attack enemies",
+  "Hint/OvertimePause": "⚡ Overtime!",
+  "Hint/Overtime": "⏰ 30s final fight",
+  "Hint/TieBreaker": "⚖️ Final frag!",
+  "Hint/EndOfMatch": "End of match",
+  "Hint/MockHintForWinners": "Congratulations on victory!",
+  "Hint/MockHintForLoosers": "Try again!",
+
+  "Statistics/Kills": "Kills",
+  "Statistics/KillsShort": "K",
+  "Statistics/Deaths": "Deaths",
+  "Statistics/DeathsShort": "D",
+  "Statistics/Spawns": "Spawns",
+  "Statistics/SpawnsShort": "S",
+  "Statistics/Scores": "Scores",
+  "Statistics/ScoresShort": "P"
 }
 

@@ -1,6 +1,7 @@
 {
   "Name": "mode.name",
   "Description": "mode.description",
+  "DefaultLang": "en",
   "StartClientVersion": 703,
   "MapFilter": {
     "IsBlank": false,

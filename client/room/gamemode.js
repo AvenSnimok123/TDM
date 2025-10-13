@@ -11,10 +11,19 @@ room.PopupsEnable = true;
 // настройки
 const WaitingPlayersTime = 10;
 const TacticalPreparationTime = 30;
-const GameModeTime = default_timer.game_mode_length_seconds();
+const OvertimeTime = 30;
+const OvertimePauseTime = 3;
 const MockModeTime = 10;
 const EndOfMatchTime = 8;
 const VoteTime = 10;
+
+// время основной битвы по размерам карт (согласно ТЗ)
+const GAME_MODE_TIMES = {
+	'Length_S': 210,  // 3:30
+	'Length_M': 270,  // 4:30
+	'Length_L': 330,  // 5:30
+	'Length_XL': 390  // 6:30
+};
 
 // очки
 const WINNER_SCORES = 30;  		// очки за победу (новое ТЗ)
@@ -26,6 +35,8 @@ const TIMER_SCORES_INTERVAL = 30;	// интервал таймера очков
 const WaitingStateValue = "Waiting";
 const TacticalPreparationStateValue = "TacticalPreparation";
 const GameStateValue = "Game";
+const OvertimeStateValue = "Overtime";        // овертайм - 30 сек решающий бой с бесконечными патронами
+const TieBreakerStateValue = "TieBreaker";    // финальный фраг - игра до первого убийства при ничьей
 const MockModeStateValue = "MockMode";
 const EndOfMatchStateValue = "EndOfMatch";
 
@@ -119,6 +130,11 @@ Damage.OnDeath.Add(function (player) {
 Damage.OnKillReport.Add(function (victim, killer, report) {
 	if (stateProp.Value == MockModeStateValue) return;
 	damageScores.applyKillReportScores(victim, killer, report);
+	
+	// если это TieBreaker (ничья в овертайме), завершаем игру
+	if (stateProp.Value === TieBreakerStateValue) {
+		SetEndOfMatch_EndMode();
+	}
 });
 
 // начисление очков за редактирование карты
@@ -147,7 +163,14 @@ mainTimer.OnTimer.Add(function () {
 			SetGameMode();
 			break;
 		case GameStateValue:
+			CheckForOvertime();
+			break;
+		case OvertimeStateValue:
+			// завершаем овертайм
 			SetEndOfMatch();
+			break;
+		case TieBreakerStateValue:
+			// TieBreaker завершается только при убийстве
 			break;
 		case MockModeStateValue:
 			SetEndOfMatch_EndMode();
@@ -170,7 +193,7 @@ function SetWaitingMode() {
 }
 function SetTacticalPreparation() {
 	stateProp.Value = TacticalPreparationStateValue;
-	Ui.GetContext().Hint.Value = "Hint/TacticalPreparation";
+	Ui.GetContext().Hint.Value = "Hint/TacticalPrep";
 	var inventory = Inventory.GetContext();
 	inventory.Main.Value = false;
 	inventory.Secondary.Value = false;
@@ -189,7 +212,7 @@ function SetGameMode() {
 	// разрешаем нанесение урона
 	Damage.GetContext().DamageOut.Value = true;
 	stateProp.Value = GameStateValue;
-	Ui.GetContext().Hint.Value = "Hint/AttackEnemies";
+	Ui.GetContext().Hint.Value = "Hint/MainBattle";
 
 	var inventory = Inventory.GetContext();
 	if (GameMode.Parameters.GetBool("OnlyKnives")) {
@@ -206,10 +229,50 @@ function SetGameMode() {
 		inventory.Build.Value = true;
 	}
 
-	mainTimer.Restart(GameModeTime);
+	// получаем время основной битвы по размеру карты
+	const gameLength = GameMode.Parameters.GetString('GameLength');
+	const gameTime = GAME_MODE_TIMES[gameLength] || GAME_MODE_TIMES['Length_M'];
+	
+	mainTimer.Restart(gameTime);
 	Spawns.GetContext().Despawn();
 	SpawnTeams();
 }
+// проверка необходимости овертайма
+function CheckForOvertime() {
+	scores_timer.Stop(); // выключаем таймер очков
+	const leaderboard = LeaderBoard.GetTeams();
+	const team1Score = leaderboard[0].Weight;
+	const team2Score = leaderboard[1].Weight;
+	
+	// проверяем условие овертайма: разница команд ≤ 10%
+	const maxScore = Math.max(team1Score, team2Score);
+	const minScore = Math.min(team1Score, team2Score);
+	const difference = maxScore > 0 ? (maxScore - minScore) / maxScore : 0;
+	
+	if (difference <= 0.1) {
+		// запускаем овертайм
+		SetOvertime();
+	} else {
+		// сразу переходим к завершению
+		SetEndOfMatch();
+	}
+}
+
+// функция овертайма
+function SetOvertime() {
+	stateProp.Value = OvertimeStateValue;
+	Ui.GetContext().Hint.Value = "Hint/Overtime";
+	
+	// включаем бесконечные патроны для всех
+	var inventory = Inventory.GetContext();
+	inventory.MainInfinity.Value = true;
+	inventory.SecondaryInfinity.Value = true;
+	inventory.ExplosiveInfinity.Value = true;
+	
+	// запускаем овертайм на 30 секунд
+	mainTimer.Restart(OvertimeTime);
+}
+
 function SetEndOfMatch() {
 	scores_timer.Stop(); // выключаем таймер очков
 	const leaderboard = LeaderBoard.GetTeams();
@@ -226,7 +289,13 @@ function SetEndOfMatch() {
 		}
 	}
 	else {
-		SetEndOfMatch_EndMode();
+		// ничья - играем до первого очка
+		if (stateProp.Value === OvertimeStateValue) {
+			stateProp.Value = TieBreakerStateValue;
+			Ui.GetContext().Hint.Value = "Hint/TieBreaker";
+		} else {
+			SetEndOfMatch_EndMode();
+		}
 	}
 }
 function SetMockMode(winners, loosers) {
