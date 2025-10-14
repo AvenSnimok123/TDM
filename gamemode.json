@@ -41,7 +41,8 @@
       }
     },
     {
-      "MapListId": 581
+      "MapListId": 581,
+      "Name": "maplist.interesting"
     }
   ],
   "ParametersDeclaration": [
