@@ -1,6 +1,7 @@
 import { DisplayValueHeader } from 'pixel_combats/basic';
 import * as room_lib from 'pixel_combats/room';
 const { room, Game, Players, Inventory, LeaderBoard, BuildBlocksSet, Teams, Damage, BreackGraph, Ui, Properties, GameMode, Spawns, Timers, TeamsBalancer, NewGame, NewGameVote, MapEditor } = room_lib;
+import * as vote_types from 'pixel_combats/types/new_game_vote';
 import * as teams from './default_teams.js';
 import * as default_timer from './default_timer.js';
 import * as damageScores from './damage_scores.js';
@@ -353,11 +354,11 @@ NewGameVote.OnResult.Add(OnVoteResult);
 function start_vote() {
 	// формируем варианты для голосования
 	var variants = [
-		new room_lib.SameVariant(),	// базовый вариант (тоже самое, что было)
-		new room_lib.OnlyUniqueVariants(true, false)]; // уникальность по картам, но не по спискам карт
+		new vote_types.SameVariant(),	// базовый вариант (тоже самое, что было)
+		new vote_types.OnlyUniqueVariants(true, false)]; // уникальность по картам, но не по спискам карт
 	
 		// если ротация карт включена, то добавляем 3 карты из всех официальных списков
-	if (MapRotation) variants.push(new room_lib.FromOfficialMapLists(3));
+	if (MapRotation) variants.push(new vote_types.FromOfficialMapLists(3));
 
 	// запускаем голосование по запросам
 	NewGameVote.Start(variants, VoteTime);
