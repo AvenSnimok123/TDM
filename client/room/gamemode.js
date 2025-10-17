@@ -353,11 +353,11 @@ NewGameVote.OnResult.Add(OnVoteResult);
 function start_vote() {
 	// формируем варианты для голосования
 	var variants = [
-		new room_lib.SameVariant(),	// базовый вариант (тоже самое, что было)
-		new room_lib.OnlyUniqueVariants(true, false)]; // уникальность по картам, но не по спискам карт
+		new room_lib.NewGameVote.SameVariant(),	// базовый вариант (тоже самое, что было)
+		new room_lib.NewGameVote.OnlyUniqueVariants(true, false)]; // уникальность по картам, но не по спискам карт
 	
 		// если ротация карт включена, то добавляем 3 карты из всех официальных списков
-	if (MapRotation) variants.push(new room_lib.FromOfficialMapLists(3));
+	if (MapRotation) variants.push(new room_lib.NewGameVote.FromOfficialMapLists(3));
 
 	// запускаем голосование по запросам
 	NewGameVote.Start(variants, VoteTime);
