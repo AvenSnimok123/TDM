@@ -3,12 +3,12 @@ import { ScoreInfo, GameMode } from 'pixel_combats/room';
 import { addTeamScores } from './team_scores.js';
 
 // модификаторы очков в зависимости от параметра GameLength
-// значения: Length_S, Length_M, Length_L, Length_XL
+// значения: S, M, L, XL
 const MAP_LENGTH_MODIFIERS = {
-	'Length_S': 0.9,
-	'Length_M': 1.0,
-	'Length_L': 1.1,
-	'Length_XL': 1.2,
+	'S': 0.9,
+	'M': 1.0,
+	'L': 1.1,
+	'XL': 1.2,
 };
 
 function getMapModifier() {

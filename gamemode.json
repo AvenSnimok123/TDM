@@ -16,28 +16,28 @@
       "MapListId": 24854,
       "Name": "S",
       "Parameters": {
-        "GameLength": "Length_S"
+        "GameLength": "S"
       }
     },
     {
       "MapListId": 24855,
       "Name": "M",
       "Parameters": {
-        "GameLength": "Length_M"
+        "GameLength": "M"
       }
     },
     {
       "MapListId": 24856,
       "Name": "L",
       "Parameters": {
-        "GameLength": "Length_L"
+        "GameLength": "L"
       }
     },
     {
       "MapListId": 24857,
       "Name": "XL",
       "Parameters": {
-        "GameLength": "Length_XL"
+        "GameLength": "XL"
       }
     },
     {
@@ -49,7 +49,7 @@
     {
       "Name": "GameLength",
       "Type": "String",
-      "Default": "Length_M"
+      "Default": "M"
     }
   ],
   "Parameters": {
