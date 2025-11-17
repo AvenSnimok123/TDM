@@ -1,7 +1,7 @@
 {
   "Name": "mode.name",
   "Description": "mode.description",
-  "DefaultLang": "en",
+  "DefaultLang": "ru",
   "StartClientVersion": 703,
   "MapFilter": {
     "IsBlank": false,
@@ -79,6 +79,11 @@
         "Name": "FriendlyFire",
         "DisplayName": "params.FriendlyFire",
         "Order": 5
+      },
+      {
+        "Name": "DeleteWeapon",
+        "DisplayName": "params.DeleteWeapon",
+        "Order": 6
       }
     ]
   }
