@@ -223,12 +223,25 @@ function SetGameMode() {
 		inventory.Melee.Value = true;
 		inventory.Explosive.Value = false;
 		inventory.Build.Value = true;
-	} else {
+	} else if (GameMode.Parameters.GetBool("DeleteWeapon")) {
+		inventory.Main.Value = false;
+		inventory.Secondary.Value = false;
+		inventory.Melee.Value = true;
+		inventory.Explosive.Value = true;
+		inventory.Build.Value = true;
+	inventory.ExplosiveInfinity.Value = true;
+  inventory.BuildInfinity.Value = true; 
+    } 
+    else {
 		inventory.Main.Value = true;
 		inventory.Secondary.Value = true;
 		inventory.Melee.Value = true;
 		inventory.Explosive.Value = true;
 		inventory.Build.Value = true;
+	inventory.MainInfinity.Value = true;
+	inventory.SecondaryInfinity.Value = true;
+	inventory.ExplosiveInfinity.Value = true;
+  inventory.BuildInfinity.Value = true;
 	}
 
 	// получаем время основной битвы по размеру карты
