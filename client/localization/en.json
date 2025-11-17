@@ -1,22 +1,23 @@
 {
   "mode.name": "Опездальские бои",
-  "mode.description": "TDM но какой-то сумасшедший",
+  "mode.description": "Особый TDM",
 
-  "maplist.allmaps": "Все карты",
-  "maplist.interesting": "Интересные карты",
+  "maplist.allmaps": "Ваще всё",
+  "maplist.interesting": "Хз какие",
 
   "params.MapRotation": "Смена рингов",
-  "params.OnlyKnives": "На ножах",
+  "params.OnlyKnives": "Онли резня",
   "params.OnlyPlayerBlocksDmg": "Ломаются только блоки участников",
   "params.LoosenBlocks": "Китайские блоки",
   "params.FriendlyFire": "Предательство",
+  "params.DeleteWeapon": "Убрать пукалки и пестики",
 
   "Hint/WaitingPlayers": "ОПЕЗДАЛЬСКИЕ БОИ СКОРО НАЧНУТСЯ!",
   "Hint/TacticalPrep": "ПОДГОТОВИТЕЛЬНЫЙ ЭТАП, РЕЗНЯ!",
   "Hint/MainBattle": "ОСНОВНОЙ ЭТАП, АТАКА!",
   "Hint/OvertimePause": "ВРЕМЯ ПРОСРАНО",
   "Hint/Overtime": "ДОП. ЭТАП, ИДИ ДО КОНЦА!",
-  "Hint/TieBreaker": "Финальный фраг!",
+  "Hint/TieBreaker": "*на перевод не хватило бюджета*",
   "Hint/EndOfMatch": "КОНЕЦ ОПЕЗДАЛЬСКИХ БОЁВ",
   "Hint/MockHintForWinners": "ПОБЕДНЫЙ ЭТАП! ВЫ ПОБЕДИЛИ!",
   "Hint/MockHintForLoosers": "ПОСЛЕДНИЙ ЭТАП, ВЫ ПРОСРАЛИ",

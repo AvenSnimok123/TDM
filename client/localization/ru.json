@@ -1,6 +1,6 @@
 {
   "mode.name": "Опездальские бои",
-  "mode.description": "TDM но какой-то сумасшедший",
+  "mode.description": "Особый TDM",
 
   "maplist.allmaps": "Ваще всё",
   "maplist.interesting": "Хз какие",
@@ -10,6 +10,7 @@
   "params.OnlyPlayerBlocksDmg": "Ломаются только блоки участников",
   "params.LoosenBlocks": "Китайские блоки",
   "params.FriendlyFire": "Предательство",
+  "params.DeleteWeapon": "Убрать пукалки и пестики",
 
   "Hint/WaitingPlayers": "ОПЕЗДАЛЬСКИЕ БОИ СКОРО НАЧНУТСЯ!",
   "Hint/TacticalPrep": "ПОДГОТОВИТЕЛЬНЫЙ ЭТАП, РЕЗНЯ!",
