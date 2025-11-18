@@ -15,9 +15,9 @@ const WaitingPlayersTime = 10;
 const TacticalPreparationTime = 30;
 const OvertimeTime = 30;
 const OvertimePauseTime = 3;
-const MockModeTime = 10;
+const MockModeTime = 30;
 const EndOfMatchTime = 8;
-const VoteTime = 10;
+const VoteTime = 20;
 
 // время основной битвы по размерам карт (согласно ТЗ)
 const GAME_MODE_TIMES = {
@@ -217,31 +217,67 @@ function SetGameMode() {
 	Ui.GetContext().Hint.Value = "Hint/MainBattle";
 
 	var inventory = Inventory.GetContext();
-	if (GameMode.Parameters.GetBool("OnlyKnives")) {
-		inventory.Main.Value = false;
+  if (GameMode.Parameters.GetBool("MainWeapon")) {
+   inventory.Main.Value = true;
+   inventory.MainInfinity.Value = true; }
+   else {
+   inventory.Main.Value = false;
+   }
+ if (GameMode.Parameters.GetBool("SecondWeapon")) {
+   inventory.Secondary.Value = true;
+   inventory.SecondaryInfinity.Value = true;
+   } else {
+   inventory.Secondary.Value = false;
+   }
+ if (GameMode.Parameters.GetBool("BombWeapon")) {
+   inventory.Explosive.Value = true;
+   inventory.ExplosiveInfinity.Value = true;
+   } else {
+   inventory.Explosive.Value = false;
+   }
+ if (GameMode.Parameters.GetBool("KnifeWeapon")) {
+   inventory.Melee.Value = true;
+   } else {
+   inventory.Melee.Value = false;
+   }
+ if (GameMode.Parameters.GetBool("Blocks")) {
+   inventory.Build.Value = true;
+   inventory.BuildInfinity.Value = true;
+   } else {
+   inventory.Build.Value = false;
+   }
+ if (GameMode.Parameters.GetBool("DeleteAllWeapon")) {
+   inventory.Main.Value = false;
 		inventory.Secondary.Value = false;
-		inventory.Melee.Value = true;
+		inventory.Melee.Value = false;
 		inventory.Explosive.Value = false;
-		inventory.Build.Value = true;
-	} else if (GameMode.Parameters.GetBool("DeleteWeapon")) {
-		inventory.Main.Value = false;
-		inventory.Secondary.Value = false;
-		inventory.Melee.Value = true;
-		inventory.Explosive.Value = true;
-		inventory.Build.Value = true;
-	inventory.ExplosiveInfinity.Value = true;
-  inventory.BuildInfinity.Value = true; 
-    } 
-    else {
-		inventory.Main.Value = true;
-		inventory.Secondary.Value = true;
-		inventory.Melee.Value = true;
-		inventory.Explosive.Value = true;
-		inventory.Build.Value = true;
-	inventory.MainInfinity.Value = true;
-	inventory.SecondaryInfinity.Value = true;
-	inventory.ExplosiveInfinity.Value = true;
-  inventory.BuildInfinity.Value = true;
+		inventory.Build.Value = false;
+   }
+	//if (GameMode.Parameters.GetBool("OnlyKnives")) {
+		//inventory.Main.Value = false;
+		//inventory.Secondary.Value = false;
+		//inventory.Melee.Value = true;
+		//inventory.Explosive.Value = false;
+		//inventory.Build.Value = true;
+	//} else if (GameMode.Parameters.GetBool("DeleteWeapon")) {
+	//	inventory.Main.Value = false;
+	//	inventory.Secondary.Value = false;
+	//	inventory.Melee.Value = true;
+	//	inventory.Explosive.Value = true;
+	//	inventory.Build.Value = true;
+//	inventory.ExplosiveInfinity.Value = true;
+ // inventory.BuildInfinity.Value = true; 
+ //   } 
+ //   else {
+//		inventory.Main.Value = true;
+//		inventory.Secondary.Value = true;
+//		inventory.Melee.Value = true;
+//		inventory.Explosive.Value = true;
+//		inventory.Build.Value = true;
+//	inventory.MainInfinity.Value = true;
+//	inventory.SecondaryInfinity.Value = true;
+//	inventory.ExplosiveInfinity.Value = true;
+//  inventory.BuildInfinity.Value = true;
 	}
 
 	// получаем время основной битвы по размеру карты
